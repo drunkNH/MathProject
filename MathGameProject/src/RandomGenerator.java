@@ -16,9 +16,23 @@ public class RandomGenerator
 	public int equation(int min, int max)
 	{
 		Scanner sc = new Scanner(System.in);
+		operation = rand.nextInt(3) + min;
+		
+		if (operation == 3)
+			max = 10; //if random generator picks a multiplication problem, makes max 10 to make it easier
+		
 		number1 = rand.nextInt(max) + min; //random number max and min
 		number2 = rand.nextInt(max) + min; 
-		operation = rand.nextInt(3) + min;
+		
+		//if random generator picks a subtraction problem, ensures the final answer of the problem can't be negative by switching the numbers
+		if (operation == 2 && number1 < number2)
+		{
+			int tempNum = number1;
+			number1 = number2;
+			number2 = tempNum;
+		}
+	
+			
 		answer = 0;
 
 		if (operation == 1)
