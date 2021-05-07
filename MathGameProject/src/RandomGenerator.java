@@ -10,9 +10,9 @@ public class RandomGenerator
 	String input;
 	int value;
 	boolean isValid = false;
-		
+
 	Random rand = new Random();
-		
+
 	public int equation(int min, int max)
 	{
 		Scanner sc = new Scanner(System.in);
@@ -20,7 +20,7 @@ public class RandomGenerator
 		number2 = rand.nextInt(max) + min; 
 		operation = rand.nextInt(3) + min;
 		answer = 0;
-		
+
 		if (operation == 1)
 		{
 			operator = '+';
@@ -36,18 +36,18 @@ public class RandomGenerator
 			operator = '*';
 			answer = number1 * number2;
 		}
-		
+
 		int choice = 0;
 		while(choice != answer)
 		{
 			System.out.println("QUESTION:  " + number1 + " " + operator + " " + number2 + " =  ?");
 			choice = sc.nextInt();
 		}
-		
+
 		return 1; //+1
 	}
-	
-	
+
+
 		/*
 		//validates input
 		while(!isValid) 
@@ -56,7 +56,6 @@ public class RandomGenerator
 			{
 				input = JOptionPane.showInputDialog("Question: \n" + number1 + " " + operator + " " + number2 + " = ?"); //asking user input
 				value = Integer.parseInt(input);
-
 					
 				if (value == answer)		
 				{
@@ -83,4 +82,3 @@ public class RandomGenerator
 		*/
 		//end of while
 } //end of equation method
-	
