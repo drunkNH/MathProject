@@ -4,7 +4,7 @@ import java.util.Random;
 public class RandomGenerator {
 	
 	//initializes variable
-	int number1, number2, answer;
+	int number1, number2, answer, operation;
 	char operator = '?';
 	String input;
 	int value;
