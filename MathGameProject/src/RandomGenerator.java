@@ -32,10 +32,10 @@ public class RandomGenerator {
 				operator = '*';
 				answer = number1 * number2;
 				break;
-			case 4:
+			/* case 4:
 				operator = '/';
 				answer = number1 / number2;
-				break;
+				break; */
 		}
 		
 		//validates input
