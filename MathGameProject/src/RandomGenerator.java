@@ -14,28 +14,25 @@ public class RandomGenerator {
 	
 	public void equation(int min, int max)
 	{
-		number1 = rand.nextInt(max) + min; //random number betw 1 & 20
+		number1 = rand.nextInt(max) + min; //random number betw 1 & 50
 		number2 = rand.nextInt(max) + min; 
+		operation = rand.nextInt(3) + min;
 		answer = 0;
 	
-		switch(rand.nextInt(4))
+		if (operation == 1)
 		{
-			case 1:
-				operator = '+';
-				answer = number1 + number2;
-				break;
-			case 2:
-				operator = '-';
-				answer = number1 - number2;
-				break;
-			case 3:
-				operator = '*';
-				answer = number1 * number2;
-				break;
-			/* case 4:
-				operator = '/';
-				answer = number1 / number2;
-				break; */
+			operator = '+';
+			answer = number1 + number2;
+		}
+		if (operation == 2)
+		{
+			operator = '-';
+			answer = number1 - number2;
+		}
+		if (operation == 3)
+		{
+			operator = '*';
+			answer = number1 * number2;
 		}
 		
 		//validates input
