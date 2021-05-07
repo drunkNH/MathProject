@@ -9,6 +9,7 @@ public class RandomGenerator
 	int operation;
 	String input;
 	int value;
+	int score;
 	boolean isValid = false;
 
 	Random rand = new Random();
@@ -52,13 +53,16 @@ public class RandomGenerator
 		}
 
 		int choice = 0;
-		while(choice != answer)
-		{
-			System.out.println("QUESTION:  " + number1 + " " + operator + " " + number2 + " =  ?");
-			choice = sc.nextInt();
-		}
+		System.out.println("QUESTION:  " + number1 + " " + operator + " " + number2 + " =  ?");
+		choice = sc.nextInt();
+		
+		//If user gets it right, they earn 1 point, else they don't earn a point
+		if (choice == answer)
+			score = 1;
+		else
+			score = 0;
 
-		return 1; //+1
+		return score; 
 	}
 
 

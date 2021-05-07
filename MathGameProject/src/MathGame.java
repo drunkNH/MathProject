@@ -18,11 +18,11 @@ public class MathGame
 	public TreeMap<String, Integer> makeLeaders()
 	{
 		TreeMap<String, Integer> test = new TreeMap<String, Integer>();
-		test.put("Terry", 10); 
-		test.put("Larry", 7); 
-		test.put("Tom", 9); 
-		test.put("Mick", 8); 
-		test.put("Cale", 6); 
+		test.put("Jeffrey", 10); 
+		test.put("Ryan", 7); 
+		test.put("Alex", 9); 
+		test.put("Vikram", 8); 
+		test.put("Sixer", 6); 
 
 		return test;
 	}
