@@ -1,4 +1,4 @@
-21GAME RULES: 
+GAME RULES: 
 
 10 questions (addition/subtraction/mult/division)
 +1 for the right question and +0 for the wrong question
