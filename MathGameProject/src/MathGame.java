@@ -5,7 +5,7 @@ import java.awt.event.*;
 
 public class MathGame 
 {
-	Score scorekeeper;
+	Hiscore scorekeeper;
 	Music musicObj;
 	RandomGenerator questionMaker = new RandomGenerator();
 	Scanner sc = new Scanner(System.in);//scanner
