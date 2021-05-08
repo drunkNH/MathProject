@@ -66,6 +66,8 @@ public class MathGame
 	  		
 	    	  for(;;)
 	    	  {
+	    		  
+	    		  //call random generator and pass the frame to use the same frame
 	    		  System.out.println("ENTER YOUR NAME.");
 	    		  String name = sc.nextLine();
 	    		  int score = 0;
