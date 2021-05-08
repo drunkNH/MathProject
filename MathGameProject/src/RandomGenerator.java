@@ -33,7 +33,6 @@ public class RandomGenerator
 			number2 = tempNum;
 		}
 	
-			
 		answer = 0;
 
 		if (operation == 1)
