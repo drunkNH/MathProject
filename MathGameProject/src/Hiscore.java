@@ -1,5 +1,6 @@
 import java.util.*;
 import java.util.Map.Entry;
+import javax.swing.*;
 public class Hiscore 
 {
 	//method to store a player's high score with their name.
@@ -37,17 +38,20 @@ public class Hiscore
 	}
 		
 	//displays the high scores, stops after 5 iterations
-	public static void display (TreeMap<String, Integer> hiscores)
+	public static void display (TreeMap<String, Integer> hiscores, JFrame frame)
 	{
 		Map<String, Integer> display = sortByValues(hiscores);
 		int i = 0;
+		String msg = "Name      |Score      \n";
 		for (Entry<String, Integer> entry : display.entrySet()) 
 		{
-			System.out.println(entry.getKey() + ": " + entry.getValue());
+			msg = entry.getKey() + ": " + entry.getValue();
 			i++;
 			if (i == 5)
 				break;
 		}
+		JLabel label = new JLabel(msg);
+		frame.add(label);
 	}
 	/*	
 		 public static void main(String[] args) {
