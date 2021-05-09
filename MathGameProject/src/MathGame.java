@@ -64,17 +64,17 @@ public class MathGame
 	    	  TreeMap <String, Integer> leaderboard = new TreeMap<String, Integer>();
 	    	  leaderboard = makeLeaders();
 	  		
-	    	  questionMaker.equation(1,50,frame)
-	    		  leaderboard = scorekeeper.calculateScores(name, score, leaderboard);
-	    		  scorekeeper.display(leaderboard);
-	  		
-	  		
-	  		
-	    		  //asks do you want to play again screen
-	    		  System.out.println("DO YOU WANT TO PLAY AGAIN Y/N");
-	  			
-	    		  if(sc.equals(""))
-	    			  break;
+	    	//  frame.remove(startButton);
+	    	//  frame.remove(exitButton);
+	    	//  frame.remove(label1);
+	    	  
+	    	  frame.removeAll();
+	    	  
+	    	  questionMaker.equation(1,50,frame,leaderboard);
+	    	  
+	    	  frame.add(startButton);//adding button in JFrame 
+	    	  frame.add(exitButton);//adding button in JFrame 
+	    	  frame.add(label1);//adding label in JFrame 
 	    	  }
 	      }
 	}
