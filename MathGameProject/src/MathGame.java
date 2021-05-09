@@ -54,7 +54,7 @@ public class MathGame
 	    if (interval == 1)
 	        timer.cancel();
 	    return --interval;
-	}
+	
 	*/
 	
 	class startActionListener implements ActionListener //this action listener for the clear Button

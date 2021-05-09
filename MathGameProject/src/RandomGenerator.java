@@ -45,7 +45,7 @@ public class QuestionGenerator extends JPanel
 			//call music method right here
 	      
 			frame.removeAll()
-			//TODO: LABEL SAYS STARTING IN, 3, 2, 1
+			//TODO: LABEL SAYS STARTING IN, 3, 2,1
 			
 			wait(1000);
 	      
