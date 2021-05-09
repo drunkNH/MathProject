@@ -1,5 +1,7 @@
 import java.util.*;
 import java.util.Map.Entry;
+import javax.swing.*;
+import java.awt.event.*;
 public class Hiscore 
 {
 	//method to store a player's high score with their name.
@@ -35,19 +37,41 @@ public class Hiscore
 		    sortedByValues.putAll(map);
 		    return sortedByValues;
 	}
-		
 	//displays the high scores, stops after 5 iterations
-	public static void display (TreeMap<String, Integer> hiscores)
+	public static boolean display (TreeMap<String, Integer> hiscores, JFrame frame)
 	{
 		Map<String, Integer> display = sortByValues(hiscores);
 		int i = 0;
+		String msg = "Name      |Score      \n";
 		for (Entry<String, Integer> entry : display.entrySet()) 
 		{
-			System.out.println(entry.getKey() + ": " + entry.getValue());
+			msg = entry.getKey() + ": " + entry.getValue();
 			i++;
 			if (i == 5)
 				break;
 		}
+		JLabel label = new JLabel(msg);
+		frame.add(label);
+		
+		JButton playAgain = new JButton("Play Again");
+		playAgain.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		    	frame.dispose();
+		    }
+		});
+		
+		JButton exitButton = new JButton("Exit");
+		exitButton.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		    	frame.dispose();
+		    	System.exit(0);
+		    }
+		});
+		
+		return true;
+		
 	}
 	/*	
 		 public static void main(String[] args) {
