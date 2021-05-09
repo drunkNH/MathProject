@@ -141,38 +141,4 @@ public class QuestionGenerator extends JPanel
 			Thread.currentThread().interrupt();
 		}
 	}
-
-		/*
-		//validates input
-		while(!isValid) 
-		{
-			try 
-			{
-				input = JOptionPane.showInputDialog("Question: \n" + number1 + " " + operator + " " + number2 + " = ?"); //asking user input
-				value = Integer.parseInt(input);
-					
-				if (value == answer)		
-				{
-					JOptionPane.showMessageDialog(null, "Answer is correct!");
-					break;
-				}
-				else
-				{
-					JOptionPane.showMessageDialog(null, "Answer is wrong!"); //throw the error message
-				}
-			} 
-			catch (NumberFormatException e) //catches if inputed value is not an integer
-			{
-				JOptionPane.showMessageDialog(null, "Error! Please enter an integer type data.");
-			}
-			catch (IllegalArgumentException e) //catches if illegal argument has been passed
-			{
-				JOptionPane.showMessageDialog(null, "Error! Please enter an integer type data.");
-			}
-			catch (Exception e) //catches if inputed value is not in range
-			{
-				JOptionPane.showMessageDialog(null, e);
-			}
-		*/
-		//end of while
-} //end of equation method
+} //end of randomGenerator class
