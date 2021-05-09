@@ -20,14 +20,14 @@ public class MathGame
 	
 	public TreeMap <String, Integer> makeLeaders()
 	{
-		TreeMap<String, Integer> test = new TreeMap<String, Integer>();
+		TreeMap<String, Integer> defaultScores = new TreeMap<String, Integer>();
 		test.put("Terry", 10); 
 		test.put("Larry", 7); 
 		test.put("Tom", 9); 
 		test.put("Mick", 8); 
 		test.put("Cale", 6); 
 		
-		return test;
+		return defaultScores;
 	}
 	
 	/* FIX THIS
@@ -64,21 +64,7 @@ public class MathGame
 	    	  TreeMap <String, Integer> leaderboard = new TreeMap<String, Integer>();
 	    	  leaderboard = makeLeaders();
 	  		
-	    	  for(;;)
-	    	  {
-	    		  
-	    		  //call random generator and pass the frame to use the same frame
-	    		  System.out.println("ENTER YOUR NAME.");
-	    		  String name = sc.nextLine();
-	    		  int score = 0;
-	    		  //GAME STARTING
-	    		  for(int i=0; i<10; i++)
-	    		  {
-	    			  score += questionMaker.equation(1,50);
-	    			  System.out.println(score);
-	    		  }//end of game
-	  			
-	    		  //calls function that takes in score and name
+	    	  questionMaker.equation(1,50,frame)
 	    		  leaderboard = scorekeeper.calculateScores(name, score, leaderboard);
 	    		  scorekeeper.display(leaderboard);
 	  		
