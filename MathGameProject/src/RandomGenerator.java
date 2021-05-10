@@ -1,3 +1,6 @@
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
 public class RandomGenerator extends JPanel
 {
 	//initializes variable
@@ -15,13 +18,15 @@ public class RandomGenerator extends JPanel
 	//TODO: LABEL ASKS WHAT IS YOUR NAME AND ACCEPTS IT INTO NAME 
 	JLabel label1 = new JLabel("What is your name: ");
 	JLabel label2 = new JLabel("SCORE: " + score);
+	JLabel label3 = new JLabel("Starting in...");
 	//TODO: PUT A TEXTBOX
 	JTextField textbox = new JTextField("Type in your answer here", 20);
 	//enter button
 	JButton enterButton = new JButton("Enter");
 	
-	label1.setBounds(225,30,100,100);
-	label1.setBounds(225,30,100,100);
+	label1.setBounds(225,30,100,100); //label for asking questions
+	label2.setBounds(225,30,100,100); //label for score
+	label3.setBounds(225,300,100,100); //label for starting in 3, 2, 1
 	
 	textbox.setBounds(225,200,50,50);
 	enterButton.setBounds(225,250,100,100);
@@ -37,20 +42,31 @@ public class RandomGenerator extends JPanel
 			frame.add(label1);
 			frame.add(textbox);
 			frame.add(enterButton);
+			//LABEL ASKS WHAT IS YOUR NAME AND ACCEPTS IT INTO NAME
 			enterButton.addActionListener(new nameActionListener());
 
-			//TODO: LABEL ASKS WHAT IS YOUR NAME AND ACCEPTS IT INTO NAME
+			
 				
 			//TODO: THEN ASKS DO YOU WANT MUSIC pushes answer into playMusic
 			//call music method right here
 	      
-			frame.removeAll()
-			//TODO: LABEL SAYS STARTING IN, 3, 2,1
+			frame.removeAll();
 			
+			//LABEL SAYS STARTING IN, 3, 2,1
+			frame.add(label3);
 			wait(1000);
-	      
+			label3.setBounds(275, 250, 50, 50);
+			label3.setText("3");
+			wait(1000);
+			label3.setText("2");
+			wait(1000);
+			label3.setText("1");
+			wait(1000);
+			frame.removeAll();
+			
 			for(int i=0; i<10; i++)
 			{
+				//CREATING QUESTION HERE
 				frame.add(label2); //add label2 for score
 				operation = rand.nextInt(3) + min;
 					
@@ -88,36 +104,32 @@ public class RandomGenerator extends JPanel
 
 				int choice = 0;
 				
-				//System.out.println("QUESTION:  " + number1 + " " + operator + " " + number2 + " =  ?");
-				//TODO: PRINTS THE QUESTION ON LABEL1
+				//PRINTS THE QUESTION ON LABEL1
 				label1.setText("QUESTION:  " + number1 + " " + operator + " " + number2 + " = ?");
-				
+				enterButton.addActionListener(new mathActionListener());
 					
-				//TODO: choice = textbox
-					
-				//If user gets it right, they earn 1 point, else they don't earn a point
+				//IF USER ANSWER IS RIGHT THEN ADD 1 TO SCORE
 				if (choice == answer)
 					score =+ 1;
 					
-				//TODO: UPDATE SCORE LABEL
-				}//end of question loop 
+				//UPDATE THE SCORE LABEL
+				label2.setText("SCORE: " + score);
+			}//end of question loop 
 				
-				//TODO: delete the buttons and labels here
-				//frame.remove(label1);
-				//frame.remove(label2);
-				//frame.remove(textbox);
+			//TODO: RESETS THE FRAME
+			frame.removeAll();
 				
-				//TODO: Calls the hiscore function passes name, score, and treemap
-				leaderboard = scorekeeper.calculateScores(name, score, leaderboard);
-				decision = scorekeeper.display(leaderboard, frame);
+			//TODO: Calls the hiscore function passes name, score, and treemap
+			leaderboard = scorekeeper.calculateScores(name, score, leaderboard);
+			decision = scorekeeper.display(leaderboard, frame);
 				
-				if (decision == false)
-				{
-					frame.getContentPane().removeAll();
-					restart = false;
-				}
+			if (decision == false)
+			{
+				frame.getContentPane().removeAll();
+				restart = false;
 			}
 		}
+	}
 
 	
 	class nameActionListener implements ActionListener //this action listener for the clear Button
@@ -128,8 +140,16 @@ public class RandomGenerator extends JPanel
 	  			name = textbox.getText();
 	      }
 	}
+	
+	class mathActionListener implements ActionListener //this action listener for the clear Button
+	{
+	      public void actionPerformed(ActionEvent e) 
+	      {
+	    	  	//stores name value after textbox input
+	  			answer = textbox.getText();
+	      }
+	}
   
-
 	private static void wait(int ms)
 	{
 		try	

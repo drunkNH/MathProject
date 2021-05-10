@@ -30,33 +30,6 @@ public class MathGame
 		return defaultScores;
 	}
 	
-	/* FIX THIS
-	public void timing()
-	{
-	    int secs=10;
-	    int delay = 1000;
-	    int period = 1000;
-	    timer = new Timer();
-	    interval = (secs);
-	    System.out.println(secs);
-	    
-	    timer.scheduleAtFixedRate(new TimerTask() 
-	    {
-	        public void run() 
-	        {
-	            System.out.println(setInterval());
-	        }
-	    }, delay, period);
-	}
-    
-	private static final int setInterval() 
-	{
-	    if (interval == 1)
-	        timer.cancel();
-	    return --interval;
-	
-	*/
-	
 	class startActionListener implements ActionListener //this action listener for the clear Button
 	{
 	      public void actionPerformed(ActionEvent e) 
@@ -75,7 +48,6 @@ public class MathGame
 	    	  frame.add(startButton);//adding button in JFrame 
 	    	  frame.add(exitButton);//adding button in JFrame 
 	    	  frame.add(label1);//adding label in JFrame 
-	    	  }
 	      }
 	}
 	
@@ -109,3 +81,28 @@ public class MathGame
 		
 	}//end of startGame()
 }
+/* FIX THIS
+	public void timing()
+	{
+	    int secs=10;
+	    int delay = 1000;
+	    int period = 1000;
+	    timer = new Timer();
+	    interval = (secs);
+	    System.out.println(secs);
+	    
+	    timer.scheduleAtFixedRate(new TimerTask() 
+	    {
+	        public void run() 
+	        {
+	            System.out.println(setInterval());
+	        }
+	    }, delay, period);
+	}
+    
+	private static final int setInterval() 
+	{
+	    if (interval == 1)
+	        timer.cancel();
+	    return --interval;
+*/
