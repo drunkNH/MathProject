@@ -1,4 +1,4 @@
-public class QuestionGenerator extends JPanel
+public class RandomGenerator extends JPanel
 {
 	//initializes variable
 	int number1, number2, answer, operation, score;
