@@ -1,6 +1,6 @@
 /*
- * Name:
- * Description: 
+ * Description: The MathGame class is an operation class that includes all the methods needed to create a GUI application,
+ * including components and event handlers, and generate a random question for the math game.
  */
 
 import java.util.*;
@@ -25,10 +25,9 @@ public class MathGame
 {
 	//variable initialization
 	final int min = 1;
-	int max = 50, counter = 0;
+	int max = 50, counter = 0, choice = 0;
 	int number1, number2, answer, operation, score;
 	char operator = '?';
-	int choice = 0;
 	String name;
 	boolean decision = false;
 	
@@ -49,7 +48,8 @@ public class MathGame
 	Font bold1 = new Font("Helvetica Bold", Font.BOLD, 18);
 	Font bold2 = new Font("Helvetica Bold", Font.PLAIN, 30);
 	
-	JFrame frame = new JFrame("Math Game"); //creates instance of JFrame
+	//creates instance of JFrame
+	JFrame frame = new JFrame("Math Game"); 
 	
 	//start menu
 	JButton startButton = new JButton("START"); //start button to start game
@@ -61,6 +61,7 @@ public class MathGame
 	JButton enterButton = new JButton("ENTER");
 	JButton musicyes = new JButton("Yes");
 	JButton musicno = new JButton("No");
+	JLabel label1 = new JLabel("Would you like music?");
 	JLabel pic2 = new JLabel(askName);
 	
 	//asks math question
@@ -77,21 +78,23 @@ public class MathGame
 	//TreeMap stores scores
 	public static TreeMap<Integer, List<String>> readLeaders() throws IOException
     {
-        TreeMap<Integer, List<String>> defaultScores = new TreeMap<Integer, List<String>>(Collections.reverseOrder());
+		TreeMap<Integer, List<String>> defaultScores = new TreeMap<Integer, List<String>>(Collections.reverseOrder());
         defaultScores = Hiscore.readScores();
 
         return defaultScores;
-    } //end of makeLeaders
+    } //end of readLeaders
 
     TreeMap<Integer, List<String>> leaderboard = new TreeMap<Integer, List<String>>();
 	
 	//starts game
 	public void startGame()
 	{
-		try {
+		try 
+		{
 			leaderboard = readLeaders();
 		}
-		catch (IOException e) {
+		catch (IOException e) 
+		{
 			e.printStackTrace();
 		}
 		
@@ -109,16 +112,16 @@ public class MathGame
 		//puts image in start menu
 		frame.add(pic1);
 		
-		//start menu componenets (first screen)
+		//start menu components (first screen)
 		frame.add(startButton);
 		frame.add(exitButton);
 		frame.add(scoreButton);
 		
-		//sets bounds for start menu components
-		pic1.setBounds(185,100,400,140);
-		startButton.setBounds(290,300,200,40); 
-		exitButton.setBounds(290,350,200,40); 
-		scoreButton.setBounds(290,400,200,40); 
+			//sets bounds for start menu components
+			pic1.setBounds(185,100,400,140);
+			startButton.setBounds(290,300,200,40); 
+			exitButton.setBounds(290,350,200,40); 
+			scoreButton.setBounds(290,400,200,40); 
 		
 		//asking name components (second screen)
 		frame.add(label2);
@@ -138,9 +141,13 @@ public class MathGame
 		//sets fonts
 		startButton.setFont(bold1);
 		exitButton.setFont(light);
+		scoreButton.setFont(light);
 		label2.setFont(bold1);
 		textbox.setFont(light);
 		enterButton.setFont(light);
+		musicyes.setFont(light);
+		musicno.setFont(light);
+		label1.setFont(bold1);
 		label3.setFont(light);
 		mathEnterButton.setFont(light);
 		
@@ -153,6 +160,50 @@ public class MathGame
 		mathEnterButton.addActionListener(new mathActionListener());
 		scoreButton.addActionListener(new scoreActionListener());
 	} //end of startGame
+
+	//generates random questions
+	public void questionGenerator()
+	{
+		//creates questions
+		operation = rand.nextInt(3) + min;
+		
+		//makes max # 10 to make it easier for user if random generator picks multiplication problem
+		if (operation == 3)
+			max = 10; 
+		
+		//sets random for number1 & number2
+		number1 = rand.nextInt(max) + min; //random number max and min
+		number2 = rand.nextInt(max) + min; 
+				
+		//ensures final answer of problem is not negative by switching #'s if random generator picks subtraction problem
+		if (operation == 2 && number1 < number2)
+		{
+			int tempNum = number1;
+			number1 = number2;
+			number2 = tempNum;
+		}
+		answer = 0;
+		
+		//randomizes operator to randomize question types
+		if (operation == 1)
+		{
+			operator = '+';
+			answer = number1 + number2;
+		}
+		if (operation == 2)
+		{
+			operator = '-';
+			answer = number1 - number2;
+		}
+		if (operation == 3)
+		{
+			operator = '*';
+			answer = number1 * number2;
+		}
+			
+		//prints question
+		label2.setText("Question:  " + number1 + " " + operator + " " + number2 + " = ?");
+	} //end of questionGenerator
 	
 	//exits game
 	class exitActionListener implements ActionListener
@@ -163,38 +214,8 @@ public class MathGame
 	      }
 	} //end of exitActionListener
 	
-	class scoreActionListener implements ActionListener
-	{
-	      public void actionPerformed(ActionEvent e) 
-	      {
-	    	//clears frame
-		    startButton.setBounds(0,0,0,0);
-		    exitButton.setBounds(0,0,0,0);
-		    scoreButton.setBounds(0,0,0,0);
-		    pic1.setBounds(0,0,0,0);
-		    
-		    //adds image
-		    frame.add(pic5);
-		    frame.add(pic4);
-	    	
-	    	pic4.setBounds(80,20,600,450);
-	    	pic5.setBounds(80,-130,600,450);
-	  		label2.setBounds(330,25,300,300); //CHANGE THE BOUNDS TO FIT WHOLE HIGH SCORES
-	  		label2.setText("<html><center><br/><br/><br/>" + hiscore.display(leaderboard) + "</center><html>");
-	  		label2.setFont(bold1);
-	  		
-	  		startButton.setText("START");
-	  		startButton.setBounds(290,375,200,40);
-	  		startButton.setFont(bold1);
-	  		
-	  		exitButton.setText("EXIT");
-			exitButton.setBounds(290,425,200,40);
-			exitButton.setFont(light);
-	      }
-	} //end of scoreActionListener
-	
 	//asks user to enter name
-	class startActionListener implements ActionListener //this action listener for the clear Button
+	class startActionListener implements ActionListener
 	{
 	      public void actionPerformed(ActionEvent e) 
 	      {
@@ -218,13 +239,43 @@ public class MathGame
 		    	//sets bounds for components
 		    	textbox.setBounds(190,300,400,30);
 		    	enterButton.setBounds(290,350,200,40);
-		    	pic2.setBounds(40,40,700,500);
+		    	pic2.setBounds(40,0,700,500);
 	    	  
 		  		//sets fonts
 				textbox.setFont(light);
 				enterButton.setFont(light);
 	      }
 	} //end of startActionListener
+	
+	//displays scores
+	class scoreActionListener implements ActionListener
+	{
+	      public void actionPerformed(ActionEvent e) 
+	      {
+	    	//clears frame
+		    startButton.setBounds(0,0,0,0);
+		    exitButton.setBounds(0,0,0,0);
+		    scoreButton.setBounds(0,0,0,0);
+		    pic1.setBounds(0,0,0,0);
+		    
+		    //adds image
+	    	frame.add(pic5);
+		    frame.add(pic4);
+	    	
+	    	//sets bounds to components
+	    	pic4.setBounds(90,20,600,450);
+	    	pic5.setBounds(90,-130,600,450);
+	  		label2.setBounds(330,65,300,300);
+	  			label2.setText("<html><center>" + hiscore.display(leaderboard) + "</center><html>");
+	  			label2.setFont(bold1);
+	  		startButton.setBounds(290,375,200,40);
+    	  		startButton.setText("START");
+    	  		startButton.setFont(bold1);
+	  		exitButton.setBounds(290,425,200,40);
+    	  		exitButton.setText("EXIT");
+    			exitButton.setFont(light);
+	      }
+	} //end of scoreActionListener
 	
 	//asks user to play music
 	class nameActionListener implements ActionListener //this action listener for the clear Button
@@ -234,9 +285,13 @@ public class MathGame
 	    	  	counter = 0;
 	    	  	name = textbox.getText();
 	    	  	
-	    	  	//sets bounds to music components
-	    	  	musicyes.setBounds(60,40,240,60);
-	    	  	musicno.setBounds(60,100,240,60);
+	    	  	//adds label
+	    	  	frame.add(label1);
+	    	  	
+	    	  	//sets bounds to components
+	    	  	musicyes.setBounds(375,495,100,30);
+	    	  	musicno.setBounds(495,495,100,30);
+	    	  	label1.setBounds(150,495,300,30);
 	      }
 	} //end of nameActionListener
 	
@@ -245,70 +300,30 @@ public class MathGame
 	{
 		public void actionPerformed(ActionEvent e) 
 		{
-			musicyes.setBounds(0,0,0,0);
-			musicno.setBounds(0,0,0,0);
-			pic2.setBounds(0,0,0,0);
+			//clears frame
+			label1.setBounds(0,0,0,0);
     	  	label2.setBounds(0,0,0,0);
     	  	enterButton.setBounds(0,0,0,0);
-    	  	
-    	  	/*
-    	  	JButton mathEnterButton = new JButton("ENTER");
-    		JLabel label2 = new JLabel();
-    		JLabel label3 = new JLabel("SCORE: " + score);
-    		JLabel pic3 = new JLabel(board);
-    		*/
+    	  	musicyes.setBounds(0,0,0,0);
+			musicno.setBounds(0,0,0,0);
+			pic2.setBounds(0,0,0,0);
     	  	
     	  	textbox.setText(null);
     	  	
     	  	//adds image
 	    	frame.add(pic3);
     	  	
-	    	pic3.setBounds(60,40,650,406);
-    	  	mathEnterButton.setBounds(290,350,200,40);
-			label3.setBounds(600,0,100,100); //label for score
-			label3.setForeground(Color.WHITE);
-			label2.setBounds(250,100,400,100);
-			label2.setFont(bold2); //sets font for question
-			label2.setForeground(Color.WHITE);
+	    	//sets bounds for components
+	    	textbox.setBounds(190,235,400,30);
+    	  	mathEnterButton.setBounds(290,285,200,40);
+			label2.setBounds(250,120,400,100);
+				label2.setFont(bold2);
+				label2.setForeground(Color.WHITE); //changes font color to white to make question visible
+			label3.setBounds(600,0,100,100);
+			pic3.setBounds(60,70,650,406);
 				
-			//CREATING QUESTION HERE
-			operation = rand.nextInt(3) + min;
+			questionGenerator();
 					
-			if (operation == 3)
-				max = 10; //if random generator picks a multiplication problem, makes max 10 to make it easier
-				
-			number1 = rand.nextInt(max) + min; //random number max and min
-			number2 = rand.nextInt(max) + min; 
-					
-			//if random generator picks a subtraction problem, ensures the final answer of the problem can't be negative by switching the numbers
-			if (operation == 2 && number1 < number2)
-			{
-				int tempNum = number1;
-				number1 = number2;
-				number2 = tempNum;
-			}
-			answer = 0;
-				
-			if (operation == 1)
-			{
-				operator = '+';
-				answer = number1 + number2;
-			}
-		
-			if (operation == 2)
-			{
-				operator = '-';
-				answer = number1 - number2;
-			}
-				
-			if (operation == 3)
-			{
-				operator = '*';
-				answer = number1 * number2;
-			}
-				
-			//PRINTS THE QUESTION ON LABEL1
-			label2.setText("QUESTION:  " + number1 + " " + operator + " " + number2 + " = ?");
 			//imports music
 			File file = new File("Loop.wav");
 			
@@ -359,100 +374,68 @@ public class MathGame
 		}
 	}
 	
-	class mathActionListener implements ActionListener //this action listener for the clear Button
+	//game continues
+	class mathActionListener implements ActionListener
 	{
 	      public void actionPerformed(ActionEvent e) 
 	      {
 	    	  	counter += 1;
 	    	  	if (counter < 10)
 	    	  	{
-	    	  	//stores name value after textbox input
-	  			choice = Integer.parseInt(textbox.getText());
-	  			textbox.setText("");
-	  			
-	  			if (choice == answer)
-					score += 1;
-					//UPDATE THE SCORE LABEL
-				label3.setText("SCORE: " + score);
-				
-				textbox.setText(null);
-					
-				//CREATING QUESTION HERE
-				operation = rand.nextInt(3) + min;
+		    	  	//stores name value after textbox input
+		  			choice = Integer.parseInt(textbox.getText());
+		  			textbox.setText("");
+		  			
+		  			//increments score if answer is correct
+		  			if (choice == answer)
+						score += 1; 
+		  			
+					//updates score
+					label3.setText("SCORE: " + score);
+					textbox.setText(null);
 						
-				if (operation == 3)
-				max = 10; //if random generator picks a multiplication problem, makes max 10 to make it easier
-						
-				number1 = rand.nextInt(max) + min; //random number max and min
-				number2 = rand.nextInt(max) + min; 
-						
-				//if random generator picks a subtraction problem, ensures the final answer of the problem can't be negative by switching the numbers
-				if (operation == 2 && number1 < number2)
-				{
-					int tempNum = number1;
-					number1 = number2;
-					number2 = tempNum;
-				}
-				
-				answer = 0;
-					
-				if (operation == 1)
-				{
-					operator = '+';
-					answer = number1 + number2;
-				}
-				if (operation == 2)
-				{
-					operator = '-';
-					answer = number1 - number2;
-				}
-				if (operation == 3)
-				{
-					operator = '*';
-					answer = number1 * number2;
-				}
-					
-					//PRINTS THE QUESTION ON LABEL1
-					label2.setText("QUESTION:  " + number1 + " " + operator + " " + number2 + " = ?");
+					questionGenerator();
 		    	}
 	    	  	else
 	    	  	{
 	    	  		choice = Integer.parseInt(textbox.getText());
 	    	  		if (choice == answer)
 						score += 1;
-	    	  		//HISCORE PART
-	    	  		label3.setBounds(0,0,0,0);
+	    	  		
+	    	  		//clears frame
 	    	  		textbox.setBounds(0,0,0,0);
 	    	  		mathEnterButton.setBounds(0,0,0,0);
+	    	  		label3.setBounds(0,0,0,0);
 	    	  		pic3.setBounds(0,0,0,0);
 	    	  		
-	    	  		try {
+	    	  		try 
+	    	  		{
 	    	  			hiscore.writeScore(name, score);
 	    	  		}
-	    	  		catch (IOException e1) {
+	    	  		catch (IOException e1) 
+	    	  		{
 	    	  			e1.printStackTrace();
 	    			}
 	    	  		
-	    	  		//CALCULATE THE SCORES HERE 
+	    	  		//calculates scores by calling storeScore() from Hiscore class
 	    	  		leaderboard = hiscore.storeScore(name, score, leaderboard);
 	    	  		
 	    	  		//adds image
-	    	  		frame.add(pic5);
-	    		    frame.add(pic4);
-	    	  		
-	    		    pic4.setBounds(80,20,600,450);
-	    	    	pic5.setBounds(80,-130,600,450);
-	    	  		label2.setBounds(330,25,300,300); //CHANGE THE BOUNDS TO FIT WHOLE HIGH SCORES
-	    	  		label2.setText("<html><center><br/><br/><br/>" + hiscore.display(leaderboard) + "</center><html>");
-	    	  		label2.setFont(bold1);
-	    	  		
-	    	  		startButton.setText("PLAY AGAIN");
+			    	frame.add(pic5);
+	    	  		frame.add(pic4);
+			    	
+			    	//sets bounds to components
+	    	  		pic4.setBounds(90,20,600,450);
+	    	    	pic5.setBounds(90,-130,600,450);
+	    	  		label2.setBounds(330,65,300,300);
+	    	  			label2.setText("<html><center>" + hiscore.display(leaderboard) + "</center><html>");
+	    	  			label2.setFont(bold1);
 	    	  		startButton.setBounds(290,375,200,40);
-	    	  		startButton.setFont(bold1);
-	    	  		
-	    	  		exitButton.setText("EXIT");
-	    			exitButton.setBounds(290,425,200,40);
-	    			exitButton.setFont(light);
+		    	  		startButton.setText("PLAY AGAIN");
+		    	  		startButton.setFont(bold1);
+	    	  		exitButton.setBounds(290,425,200,40);
+		    	  		exitButton.setText("EXIT");
+		    			exitButton.setFont(light);
 	    	  	}
 	      }  	
 	} //end of mathActionListener
