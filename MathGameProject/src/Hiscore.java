@@ -10,7 +10,9 @@ import java.util.Map.Entry;
 public class Hiscore {
 	
 	//method to store a player's high score with their name.
-	//if a name is the same but score is higher, it updates the score, if score is lower, just returns the map with no changes
+	//Allows for duplicate names to have different scores. If a player with the same name and score is entered,
+	//Deletes the name attributed with the score and adds it to the end of the list so that the player is displayed
+	//if they made it to the Top 5.
 	public static TreeMap<Integer, List<String>> storeScore (String name, int score, TreeMap<Integer, List<String>> hiscores)
 	{
 		List<String> names = new ArrayList<>();
@@ -41,7 +43,7 @@ public class Hiscore {
 		return hiscores;
 	}
 	
-	//displays the high scores, stops after 5 iterations
+	//method to return a string that displays the top 5 scores.
 	public static String display (TreeMap<Integer, List<String>> hiscores)
 	{
 		int count = 0;
@@ -63,6 +65,8 @@ public class Hiscore {
 		return msg;
 	}
 	
+	//method to write a new score into score.txt so that it saves
+	//a players score even after the program resets.
 	public void writeScore(String name, int score) throws IOException 
 	{
 		File log = new File("scores.txt");
@@ -72,6 +76,9 @@ public class Hiscore {
 		out.close();
 	}
 	
+	//method that reads scores.txt to retrieve a name and their score
+	//Then stores all name and score in text file to a TreeMap variable
+	//and returns the TreeMap with the text file data
 	public static TreeMap<Integer, List<String>> readScores() throws IOException 
 	{
 		TreeMap<Integer, List<String>> readScore = new TreeMap<Integer, List<String>>(Collections.reverseOrder());
