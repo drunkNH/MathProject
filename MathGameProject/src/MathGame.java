@@ -417,6 +417,9 @@ public class MathGame
 		    	}
 	    	  	else
 	    	  	{
+	    	  		choice = Integer.parseInt(textbox.getText());
+	    	  		if (choice == answer)
+						score += 1;
 	    	  		//HISCORE PART
 	    	  		label3.setBounds(0,0,0,0);
 	    	  		textbox.setBounds(0,0,0,0);
