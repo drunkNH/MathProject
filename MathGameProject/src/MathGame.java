@@ -204,6 +204,7 @@ public class MathGame
 		    	//clears frame
 		    	startButton.setBounds(0,0,0,0);
 		    	exitButton.setBounds(0,0,0,0);
+		    	scoreButton.setBounds(0,0,0,0);
 		    	pic1.setBounds(0,0,0,0);
 		    	
 		    	//adds image
