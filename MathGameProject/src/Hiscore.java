@@ -1,3 +1,9 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.*;
 import java.util.Map.Entry;
 
@@ -55,5 +61,33 @@ public class Hiscore {
 				break;
 		}
 		return msg;
+	}
+	
+	public void writeScore(String name, int score) throws IOException 
+	{
+		File log = new File("scores.txt");
+		PrintWriter out = new PrintWriter(new FileWriter(log, true));
+		out.write(name + ":" + score + "\n");
+		out.flush();
+		out.close();
+	}
+	
+	public static TreeMap<Integer, List<String>> readScores() throws IOException 
+	{
+		TreeMap<Integer, List<String>> readScore = new TreeMap<Integer, List<String>>(Collections.reverseOrder());
+		String name;
+		int score;
+		String line;
+		BufferedReader input = new BufferedReader(new FileReader("scores.txt"));
+		line = input.readLine();
+		while (line != null) 
+		{
+			name = line.substring(0, line.indexOf(":"));
+			score = Integer.parseInt(line.substring(line.indexOf(":") + 1));
+			readScore = storeScore(name, score, readScore);
+			line = input.readLine();
+		}
+		input.close();
+		return readScore;
 	}
 }
