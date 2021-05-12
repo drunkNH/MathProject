@@ -290,20 +290,25 @@ public class MathGame
 			answer = 0;
 				
 			if (operation == 1)
+			{
 				operator = '+';
 				answer = number1 + number2;
+			}
 		
 			if (operation == 2)
+			{
 				operator = '-';
 				answer = number1 - number2;
+			}
 				
 			if (operation == 3)
+			{
 				operator = '*';
 				answer = number1 * number2;
+			}
 				
 			//PRINTS THE QUESTION ON LABEL1
 			label2.setText("QUESTION:  " + number1 + " " + operator + " " + number2 + " = ?");
-					
 			//imports music
 			File file = new File("Loop.wav");
 			
