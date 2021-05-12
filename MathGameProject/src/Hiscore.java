@@ -45,7 +45,7 @@ public class Hiscore {
 	public static String display (TreeMap<Integer, List<String>> hiscores)
 	{
 		int count = 0;
-		String msg = "Name      |Score      <br/>";
+		String msg = "Name      | Score      <br/>";
 		
 		for (Entry<Integer, List<String>> entry : hiscores.entrySet()) 
 		{
