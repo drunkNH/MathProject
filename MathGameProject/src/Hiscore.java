@@ -1,73 +1,59 @@
 import java.util.*;
 import java.util.Map.Entry;
-import java.util.Comparator;
 
 public class Hiscore {
 	
 	//method to store a player's high score with their name.
 	//if a name is the same but score is higher, it updates the score, if score is lower, just returns the map with no changes
-	public static TreeMap<String, Integer> storeScore (String name, int score, TreeMap<String, Integer> hiscores)
+	public static TreeMap<Integer, List<String>> storeScore (String name, int score, TreeMap<Integer, List<String>> hiscores)
 	{
-		for(Entry<String, Integer> entry: hiscores.entrySet())
+		List<String> names = new ArrayList<>();
+		names.add(name);
+		for(Entry<Integer, List<String>> entry: hiscores.entrySet())
 		{
-			if (entry.getKey().equals(name))
-				if (entry.getValue() >= score)
-					return hiscores;
+				if (entry.getKey().equals(score))
+				{
+					List<String> values = entry.getValue();
+					for (int i = 0; i < values.size(); i++)
+					{
+						if (values.contains(name))
+						{
+							values.remove(i);
+							values.add(name);
+							names = values;
+							break;
+						}
+						else
+						{
+							values.add(name);
+							names = values;
+						}
+				}
+			}
 		}
-		hiscores.put(name, score);
+		hiscores.put(score, names);
 		return hiscores;
 	}
 	
-	//method to sort by values instead of key
-	public static <K, V extends Comparable<V>> Map<K, V> sortByValues(final Map<K, V> map) {
-	    Comparator<K> valueComparator =  new Comparator<K>() {
-	        public int compare(K k1, K k2) {
-	            int compare = map.get(k2).compareTo(map.get(k1));
-	            if (compare == 0) 
-	            	return 1;
-	            else 
-	            	return compare;
-	        }
-	    };
-	    Map<K, V> sortedByValues = new TreeMap<K, V>(valueComparator);
-	    sortedByValues.putAll(map);
-	    return sortedByValues;
-	}
-	
 	//displays the high scores, stops after 5 iterations
-	public static String display (TreeMap<String, Integer> hiscores)
+	public static String display (TreeMap<Integer, List<String>> hiscores)
 	{
-		Map<String, Integer> display = sortByValues(hiscores);
-		int i = 0;
+		int count = 0;
 		String msg = "Name      |Score      <br/>";
-		for (Entry<String, Integer> entry : display.entrySet()) 
+		
+		for (Entry<Integer, List<String>> entry : hiscores.entrySet()) 
 		{
-			msg += entry.getKey() + "      |" + entry.getValue() + "<br/>";
-			i++;
-			if (i == 5)
+			List<String> printable = entry.getValue();
+			for (int i = printable.size() - 1; i >= 0; i--)
+			{
+				msg += printable.get(i) + "      |" + entry.getKey() + "<br/>";
+				count++;
+				if (count == 5)
+					break;
+			}
+			if (count == 5)
 				break;
 		}
 		return msg;
 	}
-	
-	/*
-	public static void main(String[] args) {
-		TreeMap<String, Integer> test = new TreeMap<String, Integer>();
-		test.put("Terry", 10); 
-		test.put("Larry", 7); 
-		test.put("Tom", 9); 
-		test.put("Mick", 8); 
-		test.put("Cale", 6); 
-		
-		display(test); //Test initial display
-		System.out.println();
-		test = cool("Andy", 10, test);		
-		display(test);//Test Display with a new entry
-		System.out.println();
-		test = cool("Cale", 10, test);	
-		display(test);//Test Display with an updated entry
-		System.out.println();
-		test = cool("Andy", 3, test);		
-		display(test);//Test display with a failed updated entry
-	}*/
 }
