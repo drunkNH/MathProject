@@ -69,6 +69,7 @@ public class MathGame
 	JLabel pic3 = new JLabel(board);
 	
 	//displays scores
+	JButton scoreButton = new JButton("Display High Scores");
 	JLabel pic4 = new JLabel(scoreboard);
 	
 	//TreeMap stores scores
@@ -109,11 +110,13 @@ public class MathGame
 		//start menu componenets (first screen)
 		frame.add(startButton);
 		frame.add(exitButton);
+		frame.add(scoreButton);
 		
-			//sets bounds for start menu components
-			pic1.setBounds(185,100,400,140);
-			startButton.setBounds(290,300,200,40); 
-			exitButton.setBounds(290,350,200,40); 
+		//sets bounds for start menu components
+		pic1.setBounds(185,100,400,140);
+		startButton.setBounds(290,300,200,40); 
+		exitButton.setBounds(290,350,200,40); 
+		scoreButton.setBounds(290,400,200,40); 
 		
 		//asking name components (second screen)
 		frame.add(label2);
@@ -146,6 +149,7 @@ public class MathGame
 		musicno.addActionListener(new musicActionListener());
 		musicyes.addActionListener(new musicActionListener());
 		mathEnterButton.addActionListener(new mathActionListener());
+		scoreButton.addActionListener(new scoreActionListener());
 	} //end of startGame
 	
 	//exits game
@@ -156,6 +160,34 @@ public class MathGame
 	    	  System.exit(0); //exiting the window
 	      }
 	} //end of exitActionListener
+	
+	class scoreActionListener implements ActionListener
+	{
+	      public void actionPerformed(ActionEvent e) 
+	      {
+	    	//clears frame
+		    startButton.setBounds(0,0,0,0);
+		    exitButton.setBounds(0,0,0,0);
+		    scoreButton.setBounds(0,0,0,0);
+		    pic1.setBounds(0,0,0,0);
+		    
+		    //adds image
+	    	frame.add(pic4);
+	  		
+	    	pic4.setBounds(80,20,600,450);
+	  		label2.setBounds(330,25,300,300); //CHANGE THE BOUNDS TO FIT WHOLE HIGH SCORES
+	  		label2.setText("<html><center>TOP 5 SCORES<br/>" + hiscore.display(leaderboard) + "</center><html>");
+	  		label2.setFont(bold1);
+	  		
+	  		startButton.setText("START");
+	  		startButton.setBounds(290,375,200,40);
+	  		startButton.setFont(bold1);
+	  		
+	  		exitButton.setText("EXIT");
+			exitButton.setBounds(290,425,200,40);
+			exitButton.setFont(light);
+	      }
+	} //end of scoreActionListener
 	
 	//asks user to enter name
 	class startActionListener implements ActionListener //this action listener for the clear Button

@@ -52,7 +52,7 @@ public class Hiscore {
 			List<String> printable = entry.getValue();
 			for (int i = printable.size() - 1; i >= 0; i--)
 			{
-				msg += printable.get(i) + "      |" + entry.getKey() + "<br/>";
+				msg += printable.get(i) + "\t" + entry.getKey() + "<br/>";
 				count++;
 				if (count == 5)
 					break;
