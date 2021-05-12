@@ -42,6 +42,7 @@ public class MathGame
 	ImageIcon askName = new ImageIcon("name.png");
 	ImageIcon board = new ImageIcon("board.jpg");
 	ImageIcon scoreboard = new ImageIcon("score.png");
+	ImageIcon topFive = new ImageIcon("Top5.png");
 	
 	//sets fonts
 	Font light = new Font("Helvetica Light", Font.PLAIN, 18);
@@ -71,6 +72,7 @@ public class MathGame
 	//displays scores
 	JButton scoreButton = new JButton("Display High Scores");
 	JLabel pic4 = new JLabel(scoreboard);
+	JLabel pic5 = new JLabel(topFive);
 	
 	//TreeMap stores scores
 	public static TreeMap<Integer, List<String>> readLeaders() throws IOException
@@ -172,11 +174,13 @@ public class MathGame
 		    pic1.setBounds(0,0,0,0);
 		    
 		    //adds image
-	    	frame.add(pic4);
-	  		
+		    frame.add(pic5);
+		    frame.add(pic4);
+	    	
 	    	pic4.setBounds(80,20,600,450);
+	    	pic5.setBounds(80,-130,600,450);
 	  		label2.setBounds(330,25,300,300); //CHANGE THE BOUNDS TO FIT WHOLE HIGH SCORES
-	  		label2.setText("<html><center>TOP 5 SCORES<br/>" + hiscore.display(leaderboard) + "</center><html>");
+	  		label2.setText("<html><center><br/><br/><br/>" + hiscore.display(leaderboard) + "</center><html>");
 	  		label2.setFont(bold1);
 	  		
 	  		startButton.setText("START");
@@ -199,6 +203,7 @@ public class MathGame
 	    	  	label3.setText("SCORE: " + score);
 	    	  	textbox.setText(null);
 	    	  	pic4.setBounds(0,0,0,0);
+	    	  	pic5.setBounds(0,0,0,0);
 		    	label2.setBounds(0,0,0,0);
 	    	  	
 		    	//clears frame
@@ -424,11 +429,13 @@ public class MathGame
 	    	  		leaderboard = hiscore.storeScore(name, score, leaderboard);
 	    	  		
 	    	  		//adds image
-			    	frame.add(pic4);
+	    	  		frame.add(pic5);
+	    		    frame.add(pic4);
 	    	  		
-			    	pic4.setBounds(80,20,600,450);
+	    		    pic4.setBounds(80,20,600,450);
+	    	    	pic5.setBounds(80,-130,600,450);
 	    	  		label2.setBounds(330,25,300,300); //CHANGE THE BOUNDS TO FIT WHOLE HIGH SCORES
-	    	  		label2.setText("<html><center>TOP 5 SCORES<br/>" + hiscore.display(leaderboard) + "</center><html>");
+	    	  		label2.setText("<html><center><br/><br/><br/>" + hiscore.display(leaderboard) + "</center><html>");
 	    	  		label2.setFont(bold1);
 	    	  		
 	    	  		startButton.setText("PLAY AGAIN");
