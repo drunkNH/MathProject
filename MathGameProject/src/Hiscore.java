@@ -1,3 +1,8 @@
+/*
+ * The Hiscore class includes all the methods needed to store the player's name in a TreeMap, display the top 5 scores,
+ * and retrieve the scores from score.txt.
+ */
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -9,33 +14,34 @@ import java.util.Map.Entry;
 
 public class Hiscore {
 	
-	//method to store a player's high score with their name.
-	//Allows for duplicate names to have different scores. If a player with the same name and score is entered,
-	//Deletes the name attributed with the score and adds it to the end of the list so that the player is displayed
-	//if they made it to the Top 5.
+	/* method to store a player's high score with their name.
+	 * allows for duplicate names to have different scores. If a player with the same name and score is entered,
+	 * deletes the name attributed with the score and adds it to the end of the list so that the player is displayed
+	 * if they made it to the Top 5.
+	*/
 	public static TreeMap<Integer, List<String>> storeScore (String name, int score, TreeMap<Integer, List<String>> hiscores)
 	{
 		List<String> names = new ArrayList<>();
 		names.add(name);
 		for(Entry<Integer, List<String>> entry: hiscores.entrySet())
 		{
-				if (entry.getKey().equals(score))
+			if (entry.getKey().equals(score))
+			{
+				List<String> values = entry.getValue();
+				for (int i = 0; i < values.size(); i++)
 				{
-					List<String> values = entry.getValue();
-					for (int i = 0; i < values.size(); i++)
+					if (values.contains(name))
 					{
-						if (values.contains(name))
-						{
-							values.remove(i);
-							values.add(name);
-							names = values;
-							break;
-						}
-						else
-						{
-							values.add(name);
-							names = values;
-						}
+						values.remove(i);
+						values.add(name);
+						names = values;
+						break;
+					}
+					else
+					{
+						values.add(name);
+						names = values;
+					}
 				}
 			}
 		}
@@ -44,7 +50,7 @@ public class Hiscore {
 	}
 	
 	//method to return a string that displays the top 5 scores.
-	public static String display (TreeMap<Integer, List<String>> hiscores)
+	public String display (TreeMap<Integer, List<String>> hiscores)
 	{
 		int count = 0;
 		String msg = "Name      | Score      <br/>";
@@ -77,7 +83,7 @@ public class Hiscore {
 	}
 	
 	//method that reads scores.txt to retrieve a name and their score
-	//Then stores all name and score in text file to a TreeMap variable
+	//then stores all name and score in text file to a TreeMap variable
 	//and returns the TreeMap with the text file data
 	public static TreeMap<Integer, List<String>> readScores() throws IOException 
 	{
@@ -97,4 +103,4 @@ public class Hiscore {
 		input.close();
 		return readScore;
 	}
-}
+} //end of Hiscore
