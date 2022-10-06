@@ -37,12 +37,12 @@ Test game
 Maybe add animation, sounds or music
 
 TASKS:
-ALEX- “Main function” that outputs and calls other functions, no parameters
-VIKRAM- sounds, colors, animations GUI
-Jeffrey- Function to ask username checks if name is in the top 5 (initial top 5 hardcoded), takes String name, int score, Function that displays the top 5 (array sorting maybe)
+- ALEX- “Main function” that outputs and calls other functions, no parameters
+- VIKRAM- sounds, colors, animations GUI
+- Jeffrey- Function to ask username checks if name is in the top 5 (initial top 5 hardcoded), takes String name, int score, Function that displays the top 5 (array sorting maybe), I/O handling to save scores
 Hard code initial top 5
 Checks if name on the top 5 
-Ryan- Function that uses a random number gen 1-100 for numbers 1-4 for addition/sub/multi/div (generates random math problem)
+- Ryan- Function that uses a random number gen 1-100 for numbers 1-4 for addition/sub/multi/div (generates random math problem)
 
 
 CHECK IN ON SUNDAY
